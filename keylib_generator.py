@@ -56,15 +56,16 @@ def gen_file(keyNumber):
     """
     file = open('keylib.py','w',encoding='utf-8')
     print('[ Generating and writing key ... ]\n')
-    slach = '▨'
     
     file.write('# coding: utf-8\n')
     file.write('from random import choice\n\n')
+
+    c = keyNumber
     
     for number in range(1,keyNumber+1):
-        print(number,slach+'\n')
-        slach = slach+'▨'
         file.write(f'KEY{number} = {keygen(nbr_letter_sub)}\n')
+        c = c-1
+        print(c)
     
     file.write(f'listkey = {gen_listkey(keyNumber)}\n\n')
 
