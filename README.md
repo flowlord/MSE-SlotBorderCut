@@ -15,7 +15,7 @@ on peut chiffrer ces clés de chiffrement et les envoyé en toute sécurité.
 
 REQUIS 
 ---------------
-pip install pyAesCrypt
+pip install pyaescrypt
 
 pip install pyperclip
 
