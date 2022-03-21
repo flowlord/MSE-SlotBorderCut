@@ -15,7 +15,7 @@ authorized word list for encryption
 
 """
 
-from string import ascii_lowercase
+from string import ascii_lowercase,ascii_letters,digits,punctuation
 from random import shuffle
 
 

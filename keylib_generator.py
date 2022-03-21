@@ -6,6 +6,29 @@
 
 from random import randint,choice
 from gen_init import*
+from pyAesCrypt import encryptFile,decryptFile
+
+
+def gen_password():
+    char = ascii_letters+digits+punctuation
+    password = ""
+
+    x = randint(10,50)
+
+    for e in range(x):
+        password = password + choice(char)
+
+    key = open('key.txt','w',encoding='utf-8').write(password)
+
+
+def encrypt_keys():
+    key = open('key.txt','r',encoding='utf-8').readlines()[0]
+    encryptFile('keylib.py','keylib.aes',key)
+
+
+def decrypt_keys():
+    key = open('key.txt','r',encoding='utf-8').readlines()[0]
+    decryptFile('keylib.aes','keylib.py',key)
 
 
 def getRandCharac(x):
@@ -76,5 +99,5 @@ def gen_file(keyNumber):
     print('keylib.py Generated')
 
 
-
+# gen_password()
 
