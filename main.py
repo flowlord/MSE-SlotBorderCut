@@ -4,117 +4,49 @@
 """
 MSE (multiple substitution encryption)
 
-BorderSlotCut BETA VERSION !
+version Border Slot Cut using subdiv (https://github.com/flowlord/subdiv8)
 
 Créer le 16 mars 2022
 
 @author: FLOW LORD
 
-twitter: https://twitter.com/flowlord_
+Follow my twitter: https://twitter.com/flowlord_
 
-version: BSC
+version: BSC 1
+version name: NARVAL
+
+site web: https://solarissoftwarebulares.fun/
 
 Attention:
 -----------------
 ouvrir le fichier keylib.py peut faire bugger votre IDE !
-
+supprimer le dossier __pycache__ avant de regénèrer vos clés
 """
 
-from pyperclip import copy
-from gen_init import*
-from random import randint,choice
-from subdiv import change_place,change_place_ins
+
+from MSE import mse_cipher,mse_decipher
+
+example_phrase = ['meeting tonight for speak','rendez vous ce soir pour parler','hello world','on se voit ce soir','ou habitez vous',
+			'que faites vous','a bientot','à la semaine prochaine','je peux te parler','on peut se voir','jusqu ici tout va bien']
+
+def chiffrer_plusieurs_messages(liste):
+	for message in liste:
+		print(mse_cipher(message),'\n')
 
 
-try:
-    from keylib import listkey,getRandomKey
-except ModuleNotFoundError:
-    from keylib_generator import gen_file
-    gen_file(randint(1500,2500))
-    from keylib import listkey,getRandomKey
+def déchiffrer_plusieurs_messages(liste):
+	for message in liste:
+		print(mse_decipher(message),'\n')
 
 
-def cipher(plain_text):
+def demo():
+	print('Text chiffré:\n')
+	message = mse_cipher('meeting tonight for speak')
+	print(message,'\n\n')
 
-	plain_text = change_place(plain_text)
+	print('Texte déchiffré:\n')
+	print(mse_decipher(message))
 
-	print(plain_text,'\n\n')
-
-	plain_text = plain_text.lower()
-	key = getRandomKey()
-
-
-	for letter in range(nbr_letter_sub):
-		plain_text = plain_text.replace(charac_sub[letter],key[letter][1])
-	 
-
-	copy(plain_text)
-	return plain_text
-
-
-def decipher(coded_msg):
-    original_code = coded_msg
-    
-    for key in listkey:
-        for element in range(nbr_letter_sub):
-            coded_msg = coded_msg.replace(key[element][1],charac_sub[element])
-    
-    
-    return coded_msg
-
-   
-def chaos(plain_text,x):
-    """Add randomly characters from group_b to plain_text
-      in a randomly chosen position, x times.
-    """
-    plain_text = list(plain_text)
-    
-    for _ in range(x):
-        getRandCharac = choice(group_b)
-        pos = randint(0,len(plain_text))
-        
-        plain_text.insert(pos, getRandCharac)
-
-    plain_text = ''.join(plain_text)
-    return plain_text
-
-
-def deconfuse(code):
-    """
-    create a new character string without the 
-    characters that are in anti_pat
-    """
-    new_text = ""
-    for element in code:
-        if element not in group_b:
-            new_text = new_text + element  
-    return new_text
-
-
-def mse_cipher(msg):
-    coded = cipher(msg)
-    coded = chaos(coded,randint(900,1500))
-    
-    return coded
-
-
-def mse_decipher(coded_msg):
-    msg = deconfuse(coded_msg)
-    msg = decipher(msg)
-    msg = change_place_ins(msg)
-
-    return msg
-
-
-example_sentences = ['meeting tonight for speak','hello world','see you at night','where do you live',
-			'What do you do','see you soon','see you next week','see you on monday',
-			'see you tomorrow','have a good weekend','i will do that later',
-			'i can talk to you','we can see each other','im afraid im busy then',
-            'you can help me do my homework','they are there','so far so good']
-
-
-m = mse_cipher("have a good weekend")
-print(m,'\n\n')
-print(mse_decipher(m))
+demo()
 
 
