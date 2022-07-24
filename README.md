@@ -1,3 +1,6 @@
+
+**#ANCIENNE VERSION ! UNE MISE A JOUR ARRIVE PROCHAINEMENT !**
+
 # MSE - Slot Border Cut version
 -----------------------------
 Une autre version du programme MSE
